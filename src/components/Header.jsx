@@ -262,7 +262,7 @@ const Navbar = () => {
             </li>
           )}
 
-          <div className="p-4">
+          <div className="p-4 ">
             {currentUser ? (
               <Button onClick={logout}>Sign Out</Button>
             ) : (

@@ -10,6 +10,7 @@ import Footer from "../components/Footer";
 import ButtonGradient from "../assets/svg/ButtonGradient";
 import Signup from "../pages/Signup";
 import Login from "../pages/Login";
+import FAQ from "../pages/Faq";
 
 const ArfaSchool = () => { 
   return (
@@ -24,6 +25,7 @@ const ArfaSchool = () => {
             <Services />
             <Pricing />
             <Roadmap />
+            <FAQ/>
           
             <ButtonGradient />
           </>
