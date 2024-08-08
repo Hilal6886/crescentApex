@@ -1,15 +1,22 @@
 import React from "react";
 import Section from "./Section";
 import { socials } from "../constants";
+import { brainwave } from "../assets";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <Section className="bg-n-7 text-white py-10">
+    <section className="bg-n-7 text-white py-10">
+      
       <div className="container mx-auto px-4">
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8">
           {/* Company Info */}
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
-            <h2 className="text-2xl font-bold mb-4">Crescent Apex</h2>
+          <Link to="/" className="flex items-center space-x-3 text-white mb-6">
+        <a className="block w-[12rem] xl:mr-8" href="#hero">
+          <img src={brainwave} width={190} height={40} alt="Brainwave" />
+        </a>
+        </Link>
             <p className="text-gray-400 mb-4">
               © {new Date().getFullYear()} Crescent Apex. All rights reserved.
             </p>
@@ -100,7 +107,7 @@ const Footer = () => {
           </ul>
         </div>
       </div>
-    </Section>
+    </section>
   );
 };
 

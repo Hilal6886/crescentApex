@@ -4,6 +4,7 @@ import { signOut } from "firebase/auth";
 import { auth } from "./../firebase";
 import userAvatar from './../assets/avatar.png';
 import Button from "./Button";
+import { brainwave } from "../assets";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -94,7 +95,9 @@ const Navbar = () => {
     <nav className="fixed top-0 left-0 w-full z-50 bg-n-8 border-b border-gray-800">
       <div className="mx-auto flex max-w-screen-xl items-center justify-between p-4">
         <Link to="/" className="flex items-center space-x-3 text-white">
-          <h1 className="text-xl font-bold">Crescent Apex</h1>
+        <a className="block w-[12rem] xl:mr-8" href="#hero">
+          <img src={brainwave} width={190} height={40} alt="Brainwave" />
+        </a>
         </Link>
 
         <div className="md:hidden flex items-center">
