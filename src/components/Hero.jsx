@@ -23,10 +23,10 @@ const Hero = () => {
       <div className="container relative" ref={parallaxRef}>
         <div className="relative z-1 max-w-[62rem] mx-auto text-center mb-[3.875rem] md:mb-20 lg:mb-[6.25rem]">
           <h3 className="h1 mt-[-5.5rem] mb-6">
-          Empowering Businesses with&nbsp; Avanced&nbsp;Tech Solutions At {` `}
+          Empowering Businesses &nbsp; with&nbsp;Advanced {` `}
             
             <span className="inline-block relative">
-              Crescent Apex{" "}
+              Tech Solutions{" "}
               <img
                 src={curve}
                 className="absolute top-full left-0 w-full xl:-mt-2"

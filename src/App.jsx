@@ -10,6 +10,10 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Contact from "./pages/Contactus";
 import useAdmin from "../src/utils/hooks"
+import Addsoftware from "./pages/Addsoftware";
+import Table from "./pages/Table";
+import CategoryProducts from "./pages/CategoryProducts";
+import ProductDetails from "./pages/ProductDetails";
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -37,6 +41,11 @@ const App = () => {
         <Route path="/saas" element={<SaaSProducts />} />
            
         <Route path="/contact" element={<Contact />} />
+        <Route path="/addsoftware" element={<Addsoftware />} />
+        <Route path="/solutions" element={<Table />} />
+        <Route path="/products/:id" element={<CategoryProducts />} />
+        <Route path="/product/:id" element={<ProductDetails />} />
+
       </Routes>
       <Footer />
     </>

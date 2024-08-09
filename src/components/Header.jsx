@@ -85,7 +85,7 @@ const Navbar = () => {
   ];
 
   const adminItems = [
-    { name: "Add FAQ", to: "/addfaq" },
+    { name: "Add software", to: "/addsoftware" },
     { name: "Add Blog", to: "/arfa/addblog" },
     { name: "Add Gallery", to: "/arfa/uplodeimges" },
     { name: "Admission Data", to: "/arfa/admissiondata" },
@@ -150,7 +150,7 @@ const Navbar = () => {
             <li className="relative group">
               <button
                 type="button"
-                className="text-white hover:text-yellow-400"
+                className="text-white text-sm font-code uppercase hover:text-yellow-400"
                 onClick={toggleAdmin}
               >
                 Admin
@@ -162,7 +162,7 @@ const Navbar = () => {
                       key={index}
                       to={item.to}
                       onClick={closeMenu}
-                      className="block px-4 py-2 hover:bg-gray-800"
+                      className="block px-4 py-2 hover:bg-gray-800 text-sm font-code uppercase"
                     >
                       {item.name}
                     </Link>
