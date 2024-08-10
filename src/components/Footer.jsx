@@ -17,7 +17,7 @@ const Footer = () => {
           <img src={brainwave} width={190} height={40} alt="Brainwave" />
         </a>
         </Link>
-            <p className="text-gray-400 mb-4">
+            <p className="text-gray-400 mb-4 items-center">
               © {new Date().getFullYear()} Crescent Apex. All rights reserved.
             </p>
             <ul className="flex gap-4">

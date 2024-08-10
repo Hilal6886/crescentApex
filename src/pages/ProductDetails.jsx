@@ -59,7 +59,7 @@ const ProductDetails = () => {
                     </div>
 
                     {/* Contact Form */}
-                    <div className="lg:w-1/2 bg-gray-100 p-8 rounded-lg shadow-lg mt-12 lg:mt-0">
+                    <div className="lg:w-1/2 bg-n-8 border border-gray-800 p-8 rounded-lg shadow-lg mt-12 lg:mt-0">
                         <h2 className="text-3xl font-semibold text-gray-900 mb-6">Request a Quote</h2>
                         <form
                             onSubmit={(e) => {
@@ -72,7 +72,7 @@ const ProductDetails = () => {
                                 <label className="block text-sm font-medium text-gray-700">Name</label>
                                 <input
                                     type="text"
-                                    className="mt-1 block w-full p-4 border border-gray-300 rounded-lg"
+                                    className="mt-1 block w-full p-4 border bg-n-8 border-gray-300 rounded-lg"
                                     required
                                 />
                             </div>
@@ -80,14 +80,14 @@ const ProductDetails = () => {
                                 <label className="block text-sm font-medium text-gray-700">Email</label>
                                 <input
                                     type="email"
-                                    className="mt-1 block w-full p-4 border border-gray-300 rounded-lg"
+                                    className="mt-1 block w-full p-4 bg-n-8 border border-gray-300 rounded-lg"
                                     required
                                 />
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700">Message</label>
                                 <textarea
-                                    className="mt-1 block w-full p-4 border border-gray-300 rounded-lg"
+                                    className="mt-1 block w-full p-4 border bg-n-8 border-gray-300 rounded-lg"
                                     rows="6"
                                     required
                                 />
