@@ -177,12 +177,13 @@ const AddSoftware = () => {
             <div className="mb-4">
               <label className="block text-sm font-medium mb-1">Product Features:</label>
               <textarea
-                name="features"
-                className="w-full p-2 border border-gray-300 rounded"
-                value={product.features}
-                onChange={(e) => handleProductChange(e, index)}
-                required
-              />
+  name="features"
+  className="w-full p-2 border border-gray-300 rounded"
+  value={product.features}
+  onChange={(e) => handleProductChange(e, index)}
+  required
+/>
+
             </div>
 
             <button

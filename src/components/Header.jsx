@@ -94,7 +94,7 @@ const Navbar = () => {
     { name: "Portfolio", to: "/portfolio" },
     
     { name: "Resources", to: "/resources" },
-    { name: "Events", to: "/events" },
+  
     { name: "Careers", to: "/careers" },
   ];
 
