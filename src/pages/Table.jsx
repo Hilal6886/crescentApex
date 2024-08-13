@@ -7,20 +7,39 @@ import { db } from '../firebase';
 import { toast } from 'react-toastify';
 import Section from '../components/Section';
 import Heading from '../components/Heading';
+import { auth } from "./../firebase";
 
 
 const Table = () => {
   const [categories, setCategories] = useState([]);
   const [searchInput, setSearchInput] = useState('');
   const [selectedAlphabet, setSelectedAlphabet] = useState('');
+  const [currentUser, setCurrentUser] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
-  const userData = localStorage.getItem('USER');
-  let currentUser = null;
-  let isAdmin = false;
-  if (userData) {
-    currentUser = JSON.parse(userData);
-    isAdmin = currentUser.isAdmin;
-  }
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        const userData = {
+          uid: user.uid,
+          displayName: user.displayName,
+          email: user.email,
+          photoURL: user.photoURL,
+          isAdmin: true // Update this based on your logic
+        };
+        localStorage.setItem("USER", JSON.stringify(userData));
+        setCurrentUser(userData);
+        setIsAdmin(userData.isAdmin);
+      } else {
+        localStorage.removeItem("USER");
+        setCurrentUser(null);
+        setIsAdmin(false);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
 
   useEffect(() => {
     const fetchCategories = async () => {

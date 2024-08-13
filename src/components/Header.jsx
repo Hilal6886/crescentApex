@@ -16,6 +16,8 @@ const Navbar = () => {
   
   // Delay for closing dropdown
   const [dropdownTimeout, setDropdownTimeout] = useState(null);
+  const [AdminTimeout, setAdminTimeout] = useState(null);
+  const [view, setView] = useState('main'); // 'main', 'more', 'admin'
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -67,6 +69,14 @@ const Navbar = () => {
   const handleDropdownMouseLeave = () => {
     setDropdownTimeout(setTimeout(() => setIsDropdownOpen(false), 200)); // Delay for better UX
   };
+  const handleAdminMouseEnter = () => {
+    if (AdminTimeout) clearTimeout(AdminTimeout);
+    setIsAdminOpen(true);
+  };
+
+  const handleAdminMouseLeave = () => {
+    setAdminTimeout(setTimeout(() => setIsAdminOpen(false), 200)); // Delay for better UX
+  };
 
   const menuItems = [
     { name: "Home", to: "/" },
@@ -79,12 +89,11 @@ const Navbar = () => {
 
   const dropdownItems = [
     { name: "Services", to: "/services" },
-    { name: "Solutions", to: "/solutions" },
+
     { name: "Case Studies", to: "/case-studies" },
     { name: "Portfolio", to: "/portfolio" },
-    { name: "Partners", to: "/partners" },
+    
     { name: "Resources", to: "/resources" },
-    { name: "FAQs", to: "/faqs" },
     { name: "Events", to: "/events" },
     { name: "Careers", to: "/careers" },
   ];
@@ -146,7 +155,7 @@ const Navbar = () => {
                     key={index}
                     to={item.to}
                     onClick={() => setOpen(false)}
-                    className="block px-4 py-2 text-sm font-code hover:bg-gray-800"
+                    className="block px-4 py-2 text-sm font-code hover:bg-gray-800 uppercase"
                   >
                     {item.name}
                   </Link>
@@ -158,8 +167,8 @@ const Navbar = () => {
           {isAdmin && (
             <li
               className="relative group"
-              onMouseEnter={() => setIsAdminOpen(true)}
-              onMouseLeave={() => setIsAdminOpen(false)}
+              onMouseEnter={handleAdminMouseEnter}
+              onMouseLeave={handleAdminMouseLeave}
             >
               <button
                 type="button"
@@ -169,13 +178,13 @@ const Navbar = () => {
                 Admin <FaCaretDown className="ml-2" />
               </button>
               {isAdminOpen && (
-                <div className="absolute z-10 mt-2 w-56 bg-black text-white rounded shadow-lg">
+                <div className="absolute z-10 mt-2 w-56 bg-n-8 text-white rounded shadow-lg">
                   {adminItems.map((item, index) => (
                     <Link
                       key={index}
                       to={item.to}
                       onClick={() => setOpen(false)}
-                      className="block px-4 py-2 hover:bg-gray-800 text-sm font-code uppercase"
+                      className="block px-4 py-2 text-sm font-code hover:bg-gray-800 uppercase"
                     >
                       {item.name}
                     </Link>
@@ -198,96 +207,125 @@ const Navbar = () => {
       </div>
 
       {/* Mobile nav */}
-      <div
-        className={`fixed top-0 left-0 h-screen w-3/4 bg-n-8 text-white border-r border-gray-800 transition-transform duration-300 ${open ? "transform translate-x-0" : "transform -translate-x-full"}`}
-        style={{ marginTop: "4rem" }} // Adjust margin for mobile
-      >
-        <ul className="flex flex-col h-full overflow-y-auto">
-          <li className="flex items-center p-4 border-b border-gray-800">
-            <img
-              className="w-12 h-12 rounded-full mr-3"
-              src={currentUser ? currentUser.photoURL : userAvatar}
-              alt="user profile"
-            />
-            <div>
-              <span className="block text-sm font-medium">{currentUser ? currentUser.displayName : "User"}</span>
-              <p className="text-xs text-orange-500">Premium User</p>
-            </div>
+<div
+  className={`fixed top-0 left-0 h-screen w-3/4 bg-n-8 text-white border-r border-gray-800 overflow-y-auto transition-transform duration-300 ${open ? "transform translate-x-0" : "transform -translate-x-full"}`}
+  style={{ marginTop: "4.7rem" }} // Adjust margin for mobile
+>
+  <ul className="flex flex-col h-full overflow-y-auto">
+    <li className="flex items-center p-4 border-b border-gray-800">
+      <img
+        className="w-12 h-12 rounded-full mr-3"
+        src={currentUser ? currentUser.photoURL : userAvatar}
+        alt="user profile"
+      />
+      <div>
+        <span className="block text-sm font-medium">{currentUser ? currentUser.displayName : "User"}</span>
+        <p className="text-xs text-orange-500">Premium User</p>
+      </div>
+    </li>
+
+    {view === 'main' && (
+      <>
+        {menuItems.map((item, index) => (
+          <li key={index}>
+            <Link
+              to={item.to}
+              onClick={() => setOpen(false)}
+              className="block px-6 py-4 border-b border-gray-800 hover:bg-gray-800"
+            >
+              {item.name}
+            </Link>
           </li>
+        ))}
 
-          {menuItems.map((item, index) => (
-            <li key={index}>
-              <Link
-                to={item.to}
-                onClick={() => setOpen(false)}
-                className="block px-6 py-4 border-b border-gray-800 hover:bg-gray-800"
-              >
-                {item.name}
-              </Link>
-            </li>
-          ))}
+        <li className="relative border-t border-gray-800">
+          <button
+            type="button"
+            className="w-full text-left px-6 py-4 border-b border-gray-800 hover:bg-gray-800"
+            onClick={() => setView('more')}
+          >
+            More <FaCaretDown className="ml-2 inline-block" />
+          </button>
+        </li>
 
+        {isAdmin && (
           <li className="relative border-t border-gray-800">
             <button
               type="button"
               className="w-full text-left px-6 py-4 border-b border-gray-800 hover:bg-gray-800"
-              onClick={toggleDropdown}
+              onClick={() => setView('admin')}
             >
-              More <FaCaretDown className="ml-2 inline-block" />
+              Admin <FaCaretDown className="ml-2 inline-block" />
             </button>
-            {isDropdownOpen && (
-              <div className="absolute left-0 w-full bg-black text-white max-h-60 overflow-y-auto z-20">
-                {dropdownItems.map((item, index) => (
-                  <Link
-                    key={index}
-                    to={item.to}
-                    onClick={() => setOpen(false)}
-                    className="block px-6 py-4 border-b border-gray-800 hover:bg-gray-800"
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-              </div>
-            )}
           </li>
+        )}
+      </>
+    )}
 
-          {isAdmin && (
-            <li className="relative border-t border-gray-800">
-              <button
-                type="button"
-                className="w-full text-left px-6 py-4 border-b border-gray-800 hover:bg-gray-800"
-                onClick={toggleAdmin}
-              >
-                Admin <FaCaretDown className="ml-2 inline-block" />
-              </button>
-              {isAdminOpen && (
-                <div className="absolute left-0 w-full bg-black text-white z-20">
-                  {adminItems.map((item, index) => (
-                    <Link
-                      key={index}
-                      to={item.to}
-                      onClick={() => setOpen(false)}
-                      className="block px-6 py-4 border-b border-gray-800 hover:bg-gray-800"
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </li>
-          )}
+    {view === 'more' && (
+      <>
+       <li className="border-t border-gray-800">
+          <button
+            type="button"
+            className="w-full text-left px-6 py-4 border-b border-gray-800 hover:bg-gray-800"
+            onClick={() => setView('main')}
+          >
+            Go Back
+          </button>
+        </li>
+        {dropdownItems.map((item, index) => (
+          <li key={index}>
+            <Link
+              to={item.to}
+              onClick={() => setOpen(false)}
+              className="block px-6 py-4 border-b border-gray-800 hover:bg-gray-800"
+            >
+              {item.name}
+            </Link>
+          </li>
+        ))}
+       
+      </>
+    )}
 
-          <div className="p-4">
-            {currentUser ? (
-              <Button onClick={logout}>Sign Out</Button>
-            ) : (
-              <Link to="/login">
-                <Button>Sign In</Button>
-              </Link>
-            )}
-          </div>
-        </ul>
-      </div>
+    {view === 'admin' && (
+      <>
+      <li className="border-t border-gray-800">
+          <button
+            type="button"
+            className="w-full text-left px-6 py-4 border-b border-gray-800 hover:bg-gray-800"
+            onClick={() => setView('main')}
+          >
+            Go Back
+          </button>
+        </li>
+        {adminItems.map((item, index) => (
+          <li key={index}>
+            <Link
+              to={item.to}
+              onClick={() => setOpen(false)}
+              className="block px-6 py-4 border-b border-gray-800 hover:bg-gray-800"
+            >
+              {item.name}
+            </Link>
+          </li>
+        ))}
+        
+      </>
+    )}
+
+    <div className="p-4">
+      {currentUser ? (
+        <Button onClick={logout}>Sign Out</Button>
+      ) : (
+        <Link to="/login">
+          <Button>Sign In</Button>
+        </Link>
+      )}
+    </div>
+  </ul>
+</div>
+
     </nav>
   );
 };

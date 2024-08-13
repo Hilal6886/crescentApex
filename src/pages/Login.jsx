@@ -10,15 +10,17 @@ function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (loading) return;
-  
+    if (loading) return; // Wait until the loading is finished
+    if (user) navigate("/"); // Navigate to home if the user is logged in
   }, [user, loading, navigate]);
 
   const handleLogin = async () => {
     try {
       await logInWithEmailAndPassword(email, password);
+      navigate("/"); // Navigate to home after successful login
     } catch (error) {
       console.error("Error logging in:", error);
+      alert("Failed to log in. Please check your credentials and try again.");
     }
   };
 
@@ -53,7 +55,10 @@ function Login() {
 
         <button
           className="w-full bg-blue-100 border-blue-700 flex gap-2 justify-center text-black rounded-md py-3 mt-2 hover:bg-blue-200 transition duration-300"
-          onClick={signInWithGoogle}
+          onClick={async () => {
+            await signInWithGoogle();
+            navigate("/"); // Navigate to home after successful Google login
+          }}
         >
           <img className="w-6 h-6" src="https://www.svgrepo.com/show/475656/google-color.svg" loading="lazy" alt="google logo" />
           <span>Sign in with Google</span>
