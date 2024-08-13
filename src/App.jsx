@@ -14,6 +14,7 @@ import Addsoftware from "./pages/Addsoftware";
 import Table from "./pages/Table";
 import CategoryProducts from "./pages/CategoryProducts";
 import ProductDetails from "./pages/ProductDetails";
+import Consultation from "./pages/Consultation";
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -45,6 +46,8 @@ const App = () => {
         <Route path="/solutions" element={<Table />} />
         <Route path="/products/:id" element={<CategoryProducts />} />
         <Route path="/product/:id" element={<ProductDetails />} />
+        <Route path="/con" element={<Consultation />} />
+
         
 
       </Routes>

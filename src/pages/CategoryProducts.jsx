@@ -31,7 +31,8 @@ const CategoryProducts = () => {
               className="w-full h-40 lg:h-80 object-cover"
             />
             <div className="p-6">
-              <h3 className="text-xl font-semibold  mb-3">{product.name}</h3>
+              <h3 className="text-xl font-semibold  mb-3">{product.name}</h3>+
+              
               <p className="text-n-3 text-sm font-base mb-4">{product.description}</p>
               <div className="flex justify-between items-center">
                 {product.demoUrl && (
